@@ -1,30 +1,28 @@
-var http = require('http');
-var fs = require('fs');
+var express = require('express');
+var bodyParser = require('body-parser');
 
-var server = http.createServer(function (req, res) {
-    switch (req.url) {
-        case '/home':
-            console.log(req.url);
-            res.writeHead(200, { 'Content-Type': 'text/html' });
-            fs.createReadStream(__dirname + '/index.html').pipe(res)
-            break
-        case '/contact':
-            console.log(req.url);
-            res.writeHead(200, { 'Content-Type': 'text/plain' });
-            res.end('contact');
-            break
-        case '/api/contact':
-            console.log(req.url);
-            var items = [{name: 'mahadi', mob: '01717677540'}];
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify(items));
-            break
-        default:
-            console.log(req.url);
-            res.writeHead(200, { 'Content-Type': 'text/plain' });
-            res.end('default');
-    }
+var app = express();
+app.set('view engine', 'ejs');
+app.use('/assets', express.static('stuff'));
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+app.get('/', function(req, res){
+    res.render('home');
 });
 
-server.listen(3030, '127.0.0.1');
-console.log('Create Won Server');
+app.get('/contact', function(req, res){
+    // console.log(req.query);
+    res.render('contact');
+});
+
+app.post('/contact', urlencodedParser, function(req, res){
+    // console.log(req.query);
+    console.log(req.body);
+    res.render('contact');
+});
+
+app.get('/profile/:id', function(req, res){
+    var data = {age: 26, job: 'developer', hobbis: ['Shalah', 'Dawya', 'Coding']}
+    res.render('profile', {person: req.params.id, data: data});
+})
+app.listen(3030);

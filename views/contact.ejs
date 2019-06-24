@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <link rel="stylesheet" href="/assets/styles.css" />
+
+    </head>
+    <body>
+        <% include inc/nav.ejs %>
+        <h1 style="text-align: center">Contact Page</h1>
+        <form id="form-id" method="POST" accept="/contact">
+                <input type="text" name="uname" placeholder="Username" />
+                <input type="text" name="email" placeholder="Email" />
+                <input type="text" name="department" placeholder="department" />
+                <input type="submit" value="Submit" />
+        </form>
+    </body>
+</html>

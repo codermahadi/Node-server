@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <link rel="stylesheet" href="/assets/styles.css" />
+    </head>
+    <body>
+        <% include inc/nav.ejs %>
+        <h1 style="text-align: center">Profile of <%= person %></h1>
+        <p style="text-align: center">Age: <%= data.age %></p>
+        <p style="text-align: center">Job: <%= data.job %></p>
+        <h3 style="text-align: center">hobbis</h3>
+        <ul>
+            <% data.hobbis.forEach(function(item){ %>
+                <li><%= item %></li>
+           <% }) %>
+        </ul>
+    </body>
+</html>
